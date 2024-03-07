@@ -1,58 +1,28 @@
-/** @type {import('next').NextConfig} */
+// host/next.config.js
 const { NextFederationPlugin } = require("@module-federation/nextjs-mf");
 
+const remotes = (isServer) => {
+  const location = isServer ? "ssr" : "chunks";
+  return {
+    silMfCreditSimulation:
+      "silMfCreditSimulation@http://localhost:4001/static-simulation/_next/static/chunks/remoteEntry.js",
+  };
+};
+
 const nextConfig = {
-  basePath: "/crom/mf-host",
-  staticPageGenerationTimeout: 2000,
-  experimental: {
-    outputStandalone: true,
-  },
-  pageExtensions: ["js", "jsx", "ts", "tsx"],
-
-  webpack(config, options) {
-    config.resolve.modules.push(__dirname);
-    config.resolve.modules.push("./src");
-
-    if (!options.isServer) {
-      config.plugins.push(
-        new NextFederationPlugin({
-          name: "silHost",
-          filename: "static/chuncks/remoteEntry.js",
-          remotes: {
-            silMfCreditSimulation:
-              "silMfCreditSimulation@http://localhost:4021/static-simulation/_next/static/chunks/remoteEntry.js"},
-          exposes: {},
-          extraOptions: {
-            enableImageLoaderFix: true,
-          },
-          shared: {
-            react: { singleton: true, eager: true },
-            "react-dom": { singleton: true, eager: true },
-          },
-        })
-      );
-    }
+  reactStrictMode: true,
+  webpack(config, { isServer }) {
+    config.plugins.push(
+      new NextFederationPlugin({
+        name: "host",
+        filename: "static/chunks/remoteEntry.js",
+        remotes: remotes(isServer),
+        exposes: {
+          // Host app also can expose modules
+        },
+      })
+    );
 
     return config;
   },
-
-  async headers() {
-    return [
-      {
-        source: "/:path*",
-        headers: [
-          {
-            key: "X-Frame-Options",
-            value: "SAMEORIGIN",
-          },
-          {
-            key: "Content-Security-Policy",
-            value: "frame-ancestors 'self';",
-          },
-        ],
-      },
-    ]; //
-  },
 };
-
-module.exports = nextConfig;

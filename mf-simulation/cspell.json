@@ -1,0 +1,17 @@
+{
+    "version": "0.2",
+    "ignorePaths": [],
+    "dictionaryDefinitions": [],
+    "dictionaries": [],
+    "words": [
+        "araucana",
+        "axios",
+        "commitlint",
+        "CROM",
+        "laaraucana",
+        "nextjs",
+        "tailwindcss"
+    ],
+    "ignoreWords": [],
+    "import": []
+}

@@ -1,0 +1,112 @@
+.headerLayout {
+    height: 5rem;
+    display: flex;
+    justify-content: space-between;
+    width: 100%;
+}
+
+.headerMobileView {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    width: 100%;
+}
+
+.headerDesktopView {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    width: 100%;
+}
+
+.welcomeTextContainer {
+    padding-left: 10px;
+    display: flex;
+    flex-direction: column;
+    border-left: 2px solid #FFA500;
+}
+
+.welcomeText {
+    color: #00539B;
+    font-size: 14px;
+    font-style: normal;
+    font-weight: 300;
+    line-height: normal;
+}
+
+.welcomeTextName {
+    color: #00539B;
+    font-size: 12px;
+    font-style: normal;
+    font-weight: 700;
+    line-height: normal;
+}
+
+@media screen and (min-width: 1024px) and (max-width: 1155px) {
+    .logo {
+        width: 110px;
+    }
+}
+
+
+@media (min-width: 1024px) {
+    .headerMobileView {
+        display: none;
+    }
+}
+
+@media (max-width: 1023px) {
+    .headerDesktopView {
+        display: none;
+        /* Equivalente a hidden */
+    }
+}
+
+.flexRow {
+    display: flex;
+    flex-direction: row;
+}
+
+.hoverUnderlineAnimation>p {
+    position: relative;
+    color: #fff;
+
+}
+
+.hoverUnderlineAnimation:hover * {
+    font-weight: 700 !important;
+
+}
+
+.hoverUnderlineAnimation>p::after {
+    content: '';
+    position: absolute;
+    width: 100%;
+    transform: scaleX(0);
+    height: 2px;
+    bottom: -0px;
+    left: 0;
+    background-color: #FFA500;
+    transform-origin: bottom right;
+    transition: transform 0.25s ease-out;
+    font-weight: 700 !important;
+}
+
+.hoverUnderlineAnimation:hover ::after {
+    transform: scaleX(1);
+    transform-origin: bottom left;
+    font-weight: 700 !important;
+}
+
+.justifySpaceBetween {
+    display: flex;
+    justify-content: space-between
+}
+
+.selectionContainer {
+    margin-right: 10px;
+    align-items: center;
+    justify-content: "center";
+    padding: "30px";
+    width: "250px"
+}
